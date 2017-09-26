@@ -29,7 +29,7 @@ export default {
   },
   dateText: {
     color: COLORS.grey,
-    fontSize: SIZES.text.small,
+    fontSize: SIZES.text.tiny,
   },
   titleText: {
     fontSize: SIZES.text.large,
@@ -38,5 +38,6 @@ export default {
   descText: {
     color: COLORS.grey,
     fontSize: SIZES.text.small,
+    marginTop: 10,
   },
 };

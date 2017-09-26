@@ -11,6 +11,9 @@ import {
   ActivityIndicatorCore,
   GradientBackgroundCore,
 } from '../../core';
+import {
+  ListHeadingComponent,
+} from '../../components/Layouts';
 import SourceComponent from '../../components/Sources/Card';
 import { getSources, getLoadingStatus } from '../../reducers/source';
 
@@ -27,7 +30,6 @@ class HomePage extends Component {
 
   componentDidMount() {
     const self = this;
-    this.setState({ isLoading: true });
     axios.get('https://newsapi.org/v1/sources?language=en&apiKey=781c0d54f287466d8323a7955b9ce31a')
       .then(res => {
         const data = res.data.sources.map((source, index) => ({
@@ -38,28 +40,31 @@ class HomePage extends Component {
         }));
         self.props.fetchSources(data);
       })
+      .catch(err => {
+        alert('ooops!');
+      })
   }
 
   _renderListHeader() {
     return (
       <BoxCore style={{ padding: 10, marginBottom: 10, width: '100%' }}>
         <BoxCore style={{ flexDirection: 'row' }}>
-          <TextCore style={{ color: 'white', fontSize: 30, fontWeight: '100' }}>
+          <ListHeadingComponent style={{ color: 'white', fontSize: 30, fontWeight: '100' }}>
             {'Hello '}
             <Emoji name={'wave'} />
             {','}
-          </TextCore>
+          </ListHeadingComponent>
         </BoxCore>
         <BoxCore style={{ flexDirection: 'row' }}>
-          <TextCore style={{ color: 'white', fontSize: 16, lineHeight: 30 }}>
+          <ListHeadingComponent>
             {'pick'} 
-          </TextCore>
-          <TextCore style={{ color: 'white', fontSize: 16, lineHeight: 30, fontWeight: 'bold' }}>
+          </ListHeadingComponent>
+          <ListHeadingComponent style={{ fontWeight: 'bold' }}>
             {' freshly curated news'}
-          </TextCore>
-          <TextCore style={{ color: 'white', fontSize: 16, lineHeight: 30 }}>
+          </ListHeadingComponent>
+          <ListHeadingComponent>
             {' from our sources'} 
-          </TextCore>
+          </ListHeadingComponent>
         </BoxCore>
       </BoxCore>
     );
@@ -67,24 +72,24 @@ class HomePage extends Component {
 
   _renderListFooter() {
     return (
-      <BoxCore style={{ padding: 10, marginBottom: 10, flexDirection: 'row', width: '100%' }}>
-        <TextCore style={{ color: 'white', fontSize: 16, lineHeight: 30 }}>
+      <BoxCore style={{ padding: 10, marginBottom: 10, flexDirection: 'row', width: '100%', justifyContent: 'center' }}>
+        <ListHeadingComponent>
           {'That\'s all!'} 
-        </TextCore>
-        <TextCore style={{ color: 'white', fontSize: 16, lineHeight: 30, fontWeight: 'bold' }}>
+        </ListHeadingComponent>
+        <ListHeadingComponent style={{ fontWeight: 'bold' }}>
           {' Go back to top'}
-        </TextCore>
-        <TextCore style={{ color: 'white', fontSize: 16, lineHeight: 30 }}>
+        </ListHeadingComponent>
+        <ListHeadingComponent>
           <Emoji name={'point_up_2'} />
           {' to start from the first '}
           <Emoji name={'grinning'} /> 
-        </TextCore>
+        </ListHeadingComponent>
       </BoxCore>
     );
   }
 
   _renderSourceItem({ item }) {
-    return <SourceComponent {...item} onPress={() => this.props.navigation.navigate('Article')} />
+    return <SourceComponent {...item} onPress={() => this.props.navigation.navigate('Article', { sourceId: item.id, sourceName: item.name })} />
   }
 
   render() {

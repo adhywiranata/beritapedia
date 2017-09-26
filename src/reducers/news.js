@@ -1,11 +1,18 @@
 const initialState = {
   data: [],
-  isLoading: false,
+  source: {
+    id: null,
+    name: '',
+  },
+  isLoading: true,
   isError: false,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case 'FETCH_NEWS_SUCCESS': {
+      return { ...state, data: action.payload, isLoading: false };
+    }
     default: return state;
   }
 };

@@ -4,6 +4,7 @@ import {
   ArticlePage,
   DetailPage,
   HomePage,
+  SearchPage,
 } from './pages';
 
 const screenProps = {
@@ -20,9 +21,10 @@ const screenProps = {
 };
 
 const MainNavigator = StackNavigator({
-  Home: { screen: HomePage, ...screenProps },
   Article: { screen: ArticlePage, ...screenProps },
+  Home: { screen: HomePage, ...screenProps },
   Detail: { screen: DetailPage, ...screenProps },
+  Search: { screen: SearchPage, ...screenProps },
 });
 
 export default MainNavigator;
