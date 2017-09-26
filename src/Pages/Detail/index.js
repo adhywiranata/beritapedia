@@ -7,11 +7,11 @@ import {
   TextCore,
   ActivityIndicatorCore,
   GradientBackgroundCore,
-} from '../../Core';
+} from '../../core';
 
 import {
   NewsDetailComponent,
-} from '../../Components/News';
+} from '../../components/News';
 
 export default class DetailPage extends Component {
   static navigationOptions = ({ navigation }) => ({

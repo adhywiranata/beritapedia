@@ -8,7 +8,7 @@ import {
   TouchableCardCore,
   TextCore,
   BadgeCore,
-} from '../../../Core';
+} from '../../../core';
 import Styles from './styles';
 
 const Badge = ({ source }) => (

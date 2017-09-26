@@ -4,7 +4,7 @@ import {
   ArticlePage,
   DetailPage,
   HomePage,
-} from './Pages';
+} from './pages';
 
 const screenProps = {
   navigationOptions: {

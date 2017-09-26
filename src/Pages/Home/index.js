@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList } from 'react-native';
+import { connect } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 import axios from 'axios';
 import Emoji from 'react-native-emoji';
@@ -9,20 +10,17 @@ import {
   TextCore,
   ActivityIndicatorCore,
   GradientBackgroundCore,
-} from '../../Core';
-import SourceComponent from '../../Components/Sources/Card';
+} from '../../core';
+import SourceComponent from '../../components/Sources/Card';
+import { getSources, getLoadingStatus } from '../../reducers/source';
 
-export default class HomePage extends Component {
+class HomePage extends Component {
   static navigationOptions = {
     title: 'BERITAPEDIA',
   }
 
   constructor(props) {
     super(props);
-    this.state = {
-      isLoading: false,
-      sources: [],
-    }
 
     this._renderSourceItem = this._renderSourceItem.bind(this);
   }
@@ -38,10 +36,7 @@ export default class HomePage extends Component {
           description: source.description,
           category: source.category,
         }));
-        self.setState({
-          isLoading: false,
-          sources: data,
-        });
+        self.props.fetchSources(data);
       })
   }
 
@@ -95,7 +90,7 @@ export default class HomePage extends Component {
   render() {
     return (
       <GradientBackgroundCore>
-        { this.state.isLoading && (
+        { this.props.isLoading && (
           <BoxCore style={{ flex: 0, alignSelf: 'center' }}>
             <ActivityIndicatorCore />
             <TextCore style={{ color: 'white', fontSize: 18, marginTop: 30 }}>
@@ -104,11 +99,11 @@ export default class HomePage extends Component {
             </TextCore>
           </BoxCore>
           ) }
-        { !this.state.isLoading && (
+        { !this.props.isLoading && (
           <FlatList
             ListHeaderComponent={this._renderListHeader}
             ListFooterComponent={this._renderListFooter}
-            data={this.state.sources}
+            data={this.props.sources}
             renderItem={this._renderSourceItem}
             keyExtractor={item => item.id}
             style={{ width: '100%', flex: 1, paddingHorizontal: 10 }}
@@ -118,3 +113,14 @@ export default class HomePage extends Component {
     );
   }
 }
+
+const mapStateToProps = ({ source }) => ({
+  sources: getSources(source),
+  isLoading: getLoadingStatus(source),
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchSources: data => dispatch({ type: 'FETCH_SOURCES_SUCCESS', payload: data }),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

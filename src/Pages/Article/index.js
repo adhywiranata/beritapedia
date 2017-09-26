@@ -8,8 +8,8 @@ import {
   TextCore,
   ActivityIndicatorCore,
   GradientBackgroundCore,
-} from '../../Core';
-import { NewsCardComponent } from '../../Components/News';
+} from '../../core';
+import { NewsCardComponent } from '../../components/News';
 
 export default class ArticlePage extends Component {
   static navigationOptions = {

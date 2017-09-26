@@ -7,7 +7,7 @@ import {
   ButtonCore,
   CardCore,
   TextCore,
-} from '../../../Core';
+} from '../../../core';
 
 export default () => (
   <CardCore style={Styles.card}>
