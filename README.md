@@ -1,7 +1,5 @@
 # Beritapedia
 
-made by Adhy Wiranata Prasetyo, for Tokopedia React Native Mobile Engineer Project Assessment.
-
 ## Technology and Libraries
 
 - React Native
