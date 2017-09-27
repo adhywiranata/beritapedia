@@ -19,6 +19,7 @@ import {
 } from '../../components/Layouts';
 import { NewsCardComponent } from '../../components/News';
 import { getNews, getLoadingStatus } from '../../reducers/news';
+import { FETCH_NEWS } from '../../actions/constants';
 
 class ArticlePage extends Component {
   static navigationOptions = ({ navigation, props }) => ({
@@ -44,27 +45,8 @@ class ArticlePage extends Component {
   }
 
   componentDidMount() {
-    const self = this;
-    this.setState({ isLoading: true });
     const sourceId = this.props.navigation.state.params ? this.props.navigation.state.params.sourceId : 'the-next-web';
-    this.props.fetchNewsLoading();
-    axios.get(`https://newsapi.org/v1/articles?source=${sourceId}&apiKey=781c0d54f287466d8323a7955b9ce31a`)
-      .then(res => {
-        const data = res.data.articles.map((article, index) => ({
-          id: index,
-          source: article.source,
-          author: article.author,
-          title: article.title,
-          description: article.description,
-          image: article.urlToImage,
-          url: article.url,
-          publishedAt: article.publishedAt,
-        }));
-        self.props.fetchNewsSuccess(data);
-      })
-      .catch(err => {
-        alert('ooops!');
-      });
+    this.props.fetchNews(sourceId);
   }
 
   _renderListHeader() {
@@ -133,8 +115,9 @@ const mapStateToProps = ({ news }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchNewsLoading: data => dispatch({ type: 'FETCH_NEWS_LOADING' }),
-  fetchNewsSuccess: data => dispatch({ type: 'FETCH_NEWS_SUCCESS', payload: data }),
+  // fetchNewsLoading: data => dispatch(fetchNewsLoading()),
+  // fetchNewsSuccess: data => dispatch(fetchNewsSuccess(data)),
+  fetchNews: sourceId => dispatch({ type: FETCH_NEWS, payload: sourceId }),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ArticlePage);

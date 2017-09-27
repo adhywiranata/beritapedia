@@ -17,7 +17,7 @@ export default ({ title, description, image, source, publishedAt, onPress }) => 
     <BoxCore style={Styles.rightColumn}>
       <TextCore style={Styles.titleText}>{ title }</TextCore>
       <TextCore style={Styles.dateText}>{moment(publishedAt).fromNow()}</TextCore>
-      <TextCore style={Styles.descText}>{ description }</TextCore>
+      <TextCore style={Styles.descText}>{ description.substring(0, 100) }</TextCore>
     </BoxCore>
   </TouchableCardCore>
 );

@@ -17,6 +17,8 @@ import {
 } from '../../components/Layouts';
 import SourceComponent from '../../components/Sources/Card';
 import { getSources, getLoadingStatus } from '../../reducers/source';
+import { fetchSourcesSuccess } from '../../actions/sources';
+import { FETCH_SOURCES } from '../../actions/constants';
 
 class HomePage extends Component {
   static navigationOptions = {
@@ -30,20 +32,7 @@ class HomePage extends Component {
   }
 
   componentDidMount() {
-    const self = this;
-    axios.get('https://newsapi.org/v1/sources?language=en&apiKey=781c0d54f287466d8323a7955b9ce31a')
-      .then(res => {
-        const data = res.data.sources.map((source, index) => ({
-          id: source.id,
-          name: source.name,
-          description: source.description,
-          category: source.category,
-        }));
-        self.props.fetchSources(data);
-      })
-      .catch(err => {
-        alert('ooops!');
-      })
+    this.props.fetchSources();
   }
 
   _renderListHeader() {
@@ -121,7 +110,8 @@ const mapStateToProps = ({ source }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchSources: data => dispatch({ type: 'FETCH_SOURCES_SUCCESS', payload: data }),
+  // fetchSources: data => dispatch(fetchSourcesSuccess(data)),
+  fetchSources: () => dispatch({ type: FETCH_SOURCES }),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
