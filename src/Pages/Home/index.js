@@ -110,7 +110,6 @@ const mapStateToProps = ({ source }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  // fetchSources: data => dispatch(fetchSourcesSuccess(data)),
   fetchSources: () => dispatch({ type: FETCH_SOURCES }),
 });
 

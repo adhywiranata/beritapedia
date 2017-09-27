@@ -34,10 +34,6 @@ class ArticlePage extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      // isLoading: false,
-      // news: [],
-    }
 
     this._renderNewsItem = this._renderNewsItem.bind(this);
     this._renderListHeader = this._renderListHeader.bind(this);
@@ -115,8 +111,6 @@ const mapStateToProps = ({ news }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  // fetchNewsLoading: data => dispatch(fetchNewsLoading()),
-  // fetchNewsSuccess: data => dispatch(fetchNewsSuccess(data)),
   fetchNews: sourceId => dispatch({ type: FETCH_NEWS, payload: sourceId }),
 });
 

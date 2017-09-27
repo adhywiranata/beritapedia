@@ -1,9 +1,5 @@
 const initialState = {
   data: [],
-  source: {
-    id: null,
-    name: '',
-  },
   isLoading: true,
   isError: false,
 };
