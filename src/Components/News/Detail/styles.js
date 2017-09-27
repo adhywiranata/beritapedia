@@ -34,14 +34,14 @@ export default {
   },
   descText: {
     color: COLORS.grey,
-    fontSize: SIZES.text.large,
+    fontSize: SIZES.text.medium,
   },
   button: {
     marginVertical: 20,
   },
   buttonText: {
     color: COLORS.softRed,
-    fontSize: SIZES.text.large,
-    fontWeight: 'bold',
+    fontSize: SIZES.text.medium,
+    fontWeight: 'normal',
   },
 };

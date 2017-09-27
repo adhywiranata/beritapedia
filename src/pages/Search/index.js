@@ -21,6 +21,7 @@ import {
 
 import {
   ListHeadingComponent,
+  NavSearchComponent,
 } from '../../components/Layouts';
 import { getNews, getLoadingStatus } from '../../reducers/news';
 
@@ -84,16 +85,12 @@ class SearchPage extends Component {
     const filteredNews = news.filter(filterNews);
     return (
       <GradientBackgroundCore style={{ padding: 20 }}>
-        <BoxCore style={{ flex: 0, flexDirection: 'row', paddingBottom: 5, backgroundColor: 'white', width: '100%', justifyContent: 'flex-start', alignItems: 'center', elevation: 2 }}>
-          <NavTouchIconCore icon={'chevron-left'} onPress={this.props.navigation.goBack} textStyle={{ color: '#353535' }} style={{ margin: 0, padding: 0 }} />
-          <TextInput
-            value={this.state.searchKeyword}
-            onChangeText={this._setSearchKeyword}
-            placeholder={'Search for articles...'}
-            style={{ width: '80%', fontSize: 18, paddingVertical: 10 }}
-            underlineColorAndroid={'transparent'}
-          />
-        </BoxCore>
+        <NavSearchComponent
+          backLink={this.props.navigation.goBack}
+          onChangeText={this._setSearchKeyword}
+          value={this.state.searchKeyword}
+          placeholder={'Search for news articles...'}
+        />
         {searchKeyword === '' && this._renderGreet()}
         {filteredNews.length > 0 && searchKeyword !== '' && (
           <FlatList
@@ -101,7 +98,7 @@ class SearchPage extends Component {
             ListFooterComponent={this._renderListFooter}
             data={filteredNews}
             renderItem={({ item }) => (
-              <TouchableOpacity onPress={() => navigation.navigate('Detail')}>
+              <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.navigate('Detail', { ...item })}>
                 <BoxCore style={{ padding: 20, backgroundColor: 'rgba(255, 255, 255, 0.9)', margin: 0 }}>
                   <TextCore>{ item.title }</TextCore>
                 </BoxCore>

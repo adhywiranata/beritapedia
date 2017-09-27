@@ -15,14 +15,16 @@ const screenProps = {
     },
     headerStyle: {
       backgroundColor: '#c94b4b',
+      borderColor: 'transparent',
+      borderWidth: 0,
       elevation: 0,
     },
   },
 };
 
 const MainNavigator = StackNavigator({
-  Article: { screen: ArticlePage, ...screenProps },
   Home: { screen: HomePage, ...screenProps },
+  Article: { screen: ArticlePage, ...screenProps },
   Detail: { screen: DetailPage, ...screenProps },
   Search: { screen: SearchPage, ...screenProps },
 });

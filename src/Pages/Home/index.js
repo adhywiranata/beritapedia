@@ -13,6 +13,7 @@ import {
 } from '../../core';
 import {
   ListHeadingComponent,
+  ScreenLoadingComponent,
 } from '../../components/Layouts';
 import SourceComponent from '../../components/Sources/Card';
 import { getSources, getLoadingStatus } from '../../reducers/source';
@@ -72,7 +73,7 @@ class HomePage extends Component {
 
   _renderListFooter() {
     return (
-      <BoxCore style={{ padding: 10, marginBottom: 10, flexDirection: 'row', width: '100%', justifyContent: 'center' }}>
+      <BoxCore style={{ flex: 1, flexWrap: 'wrap', padding: 10, marginBottom: 10, flexDirection: 'row', width: '100%', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
         <ListHeadingComponent>
           {'That\'s all!'} 
         </ListHeadingComponent>
@@ -81,7 +82,7 @@ class HomePage extends Component {
         </ListHeadingComponent>
         <ListHeadingComponent>
           <Emoji name={'point_up_2'} />
-          {' to start from the first '}
+          {' and start from the first '}
           <Emoji name={'grinning'} /> 
         </ListHeadingComponent>
       </BoxCore>
@@ -96,13 +97,7 @@ class HomePage extends Component {
     return (
       <GradientBackgroundCore>
         { this.props.isLoading && (
-          <BoxCore style={{ flex: 0, alignSelf: 'center' }}>
-            <ActivityIndicatorCore />
-            <TextCore style={{ color: 'white', fontSize: 18, marginTop: 30 }}>
-              <Emoji name={'running'} />
-              Looking for awesome stuffs for you...
-            </TextCore>
-          </BoxCore>
+          <ScreenLoadingComponent emoji={'running'} text={'Looking for awesome stuffs for you...'} />
           ) }
         { !this.props.isLoading && (
           <FlatList
@@ -111,6 +106,7 @@ class HomePage extends Component {
             data={this.props.sources}
             renderItem={this._renderSourceItem}
             keyExtractor={item => item.id}
+            initialNumToRender={5}
             style={{ width: '100%', flex: 1, paddingHorizontal: 10 }}
           />
         )}

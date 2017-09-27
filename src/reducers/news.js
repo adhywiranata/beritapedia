@@ -10,6 +10,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case 'FETCH_NEWS_LOADING': return { ...state, isLoading: true };
     case 'FETCH_NEWS_SUCCESS': {
       return { ...state, data: action.payload, isLoading: false };
     }

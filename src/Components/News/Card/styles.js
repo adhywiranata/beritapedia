@@ -22,6 +22,7 @@ export default {
     paddingTop: 0,
   },
   newsImage: {
+    backgroundColor: COLORS.grey,
     width: 100,
     height: 100,
     resizeMode: 'cover',

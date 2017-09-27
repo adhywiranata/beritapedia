@@ -41,10 +41,11 @@ export default class DetailPage extends Component {
   }
 
   render() {
+    const article = { ...this.props.navigation.state.params };
     return (
       <GradientBackgroundCore>
-        <ScrollView style={{ flex: 1, width: '100%', padding: 20 }}>
-          <NewsDetailComponent onShowModal={this._setModalVisibility} />
+        <ScrollView style={{ flex: 0, width: '100%', padding: 20 }}>
+          <NewsDetailComponent article={article} onShowModal={this._setModalVisibility} />
         </ScrollView>
         <Modal
           animationType="slide"
@@ -56,11 +57,11 @@ export default class DetailPage extends Component {
           <BoxCore>
             <BoxCore style={Styles.modalHeader}>
               <TouchableOpacity onPress={this._setModalVisibility} style={Styles.modalButton}>
-                {/* <TextCore style={Styles.modalButtonText}>CLOSE</TextCore> */}
                 <Icon name={'close'} style={Styles.modalButtonText} />
+                <TextCore style={Styles.urlText}>{article.url.substring(0, 45)}...</TextCore>
               </TouchableOpacity>
             </BoxCore>
-            <WebView source={{uri: 'https://github.com/facebook/react-native'}} />
+            <WebView source={{uri: article.url}} />
           </BoxCore>
          </BoxCore>
         </Modal>

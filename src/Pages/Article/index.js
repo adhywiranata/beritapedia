@@ -14,7 +14,8 @@ import {
   NavTouchIconCore,
 } from '../../core';
 import {
-  ListHeadingComponent
+  ListHeadingComponent,
+  ScreenLoadingComponent,
 } from '../../components/Layouts';
 import { NewsCardComponent } from '../../components/News';
 import { getNews, getLoadingStatus } from '../../reducers/news';
@@ -46,6 +47,7 @@ class ArticlePage extends Component {
     const self = this;
     this.setState({ isLoading: true });
     const sourceId = this.props.navigation.state.params ? this.props.navigation.state.params.sourceId : 'the-next-web';
+    this.props.fetchNewsLoading();
     axios.get(`https://newsapi.org/v1/articles?source=${sourceId}&apiKey=781c0d54f287466d8323a7955b9ce31a`)
       .then(res => {
         const data = res.data.articles.map((article, index) => ({
@@ -55,14 +57,10 @@ class ArticlePage extends Component {
           title: article.title,
           description: article.description,
           image: article.urlToImage,
+          url: article.url,
           publishedAt: article.publishedAt,
         }));
-        // self.props.fetchNews({
-        //   isLoading: false,
-        //   news: data,
-        // });
-        // alert(JSON.stringify(data));
-        self.props.fetchNews(data);
+        self.props.fetchNewsSuccess(data);
       })
       .catch(err => {
         alert('ooops!');
@@ -91,7 +89,7 @@ class ArticlePage extends Component {
     return (
       <BoxCore style={{ padding: 10, marginBottom: 10, flexDirection: 'row', width: '100%', justifyContent: 'center' }}>
         <ListHeadingComponent>
-          {'You\'ve caught up yourself with the world! '}
+          {'You\'ve caught up with the world! '}
           <Emoji name={'smirk'} /> 
         </ListHeadingComponent>
       </BoxCore>
@@ -99,7 +97,12 @@ class ArticlePage extends Component {
   }
 
   _renderNewsItem({ item }) {
-    return <NewsCardComponent {...item} onPress={() => this.props.navigation.navigate('Detail')} />
+    return (
+      <NewsCardComponent
+        {...item}
+        onPress={() => this.props.navigation.navigate('Detail', { ...item })}
+      />
+    );
   }
 
   render() {
@@ -107,14 +110,8 @@ class ArticlePage extends Component {
     return (
       <GradientBackgroundCore>
         { this.props.isLoading && (
-          <BoxCore style={{ flex: 0, alignSelf: 'center' }}>
-            <ActivityIndicatorCore />
-            <TextCore style={{ color: 'white', fontSize: 18, marginTop: 30 }}>
-              <Emoji name={'sparkles'} />
-              Pulling news from {sourceName}...
-            </TextCore>
-          </BoxCore>
-          ) }
+          <ScreenLoadingComponent emoji={'sparkles'} text={`Pulling news from ${sourceName}`} />
+        ) }
         { !this.props.isLoading && (
           <FlatList
             ListHeaderComponent={this._renderListHeader}
@@ -136,7 +133,8 @@ const mapStateToProps = ({ news }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchNews: data => dispatch({ type: 'FETCH_NEWS_SUCCESS', payload: data }),
+  fetchNewsLoading: data => dispatch({ type: 'FETCH_NEWS_LOADING' }),
+  fetchNewsSuccess: data => dispatch({ type: 'FETCH_NEWS_SUCCESS', payload: data }),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ArticlePage);
