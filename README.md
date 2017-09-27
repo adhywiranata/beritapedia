@@ -20,3 +20,7 @@ Components are stateless, presentational component which have a larger chunks of
 The app uses Redux for its state management, and Redux commonly uses these three: Store, Reducers, and Actions. to maintain app code's structure and also to handle asynchronous action dispatch calls, the app also make use of Redux Saga, contained inside the sagas folder.
 
 Lint: AirBnB
+
+## API Key
+
+Api key used on NewsAPI is available in the .env file.
