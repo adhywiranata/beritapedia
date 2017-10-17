@@ -15,7 +15,7 @@ const textDefaultStyle = {
 export default ({ onPress, icon, textStyle = {}, style = {} }) => (
   <TouchableOpacity
     activeOpacity={0.9}
-    onPress={() => onPress()}
+    onPress={onPress}
     style={[{ paddingHorizontal: 10 }, style]}
   >
     <Icon name={icon} style={[textDefaultStyle, textStyle]} />
