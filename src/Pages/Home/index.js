@@ -10,15 +10,15 @@ import {
   TextCore,
   ActivityIndicatorCore,
   GradientBackgroundCore,
-} from '../../core';
+} from 'beritapedia/src/core';
 import {
   ListHeadingComponent,
   ScreenLoadingComponent,
-} from '../../components/Layouts';
-import SourceComponent from '../../components/Sources/Card';
-import { getSources, getLoadingStatus } from '../../reducers/source';
-import { fetchSourcesSuccess } from '../../actions/sources';
-import { FETCH_SOURCES } from '../../actions/constants';
+} from 'beritapedia/src/components/Layouts';
+import SourceComponent from 'beritapedia/src/components/Sources/Card';
+import { getSources, getLoadingStatus } from 'beritapedia/src/reducers/source';
+import { fetchSourcesSuccess } from 'beritapedia/src/actions/sources';
+import { FETCH_SOURCES } from 'beritapedia/src/actions/constants';
 
 class HomePage extends Component {
   static navigationOptions = {

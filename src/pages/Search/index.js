@@ -13,17 +13,17 @@ import {
   GradientBackgroundCore,
   NavBackCore,
   NavTouchIconCore,
-} from '../../core';
+} from 'beritapedia/src/core';
 
 import {
   NewsDetailComponent,
-} from '../../components/News';
+} from 'beritapedia/src/components/News';
 
 import {
   ListHeadingComponent,
   NavSearchComponent,
-} from '../../components/Layouts';
-import { getNews, getLoadingStatus } from '../../reducers/news';
+} from 'beritapedia/src/components/Layouts';
+import { getNews, getLoadingStatus } from 'beritapedia/src/reducers/news';
 
 class SearchPage extends Component {
   static navigationOptions = ({

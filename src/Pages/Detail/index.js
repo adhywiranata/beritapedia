@@ -10,11 +10,11 @@ import {
   ActivityIndicatorCore,
   GradientBackgroundCore,
   NavBackCore,
-} from '../../core';
+} from 'beritapedia/src/core';
 
 import {
   NewsDetailComponent,
-} from '../../components/News';
+} from 'beritapedia/src/components/News';
 
 export default class DetailPage extends Component {
   static navigationOptions = ({ navigation }) => ({

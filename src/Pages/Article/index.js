@@ -12,14 +12,14 @@ import {
   GradientBackgroundCore,
   NavBackCore,
   NavTouchIconCore,
-} from '../../core';
+} from 'beritapedia/src/core';
 import {
   ListHeadingComponent,
   ScreenLoadingComponent,
-} from '../../components/Layouts';
-import { NewsCardComponent } from '../../components/News';
-import { getNews, getLoadingStatus } from '../../reducers/news';
-import { FETCH_NEWS } from '../../actions/constants';
+} from 'beritapedia/src/components/Layouts';
+import { NewsCardComponent } from 'beritapedia/src/components/News';
+import { getNews, getLoadingStatus } from 'beritapedia/src/reducers/news';
+import { FETCH_NEWS } from 'beritapedia/src/actions/constants';
 
 class ArticlePage extends Component {
   static navigationOptions = ({ navigation, props }) => ({

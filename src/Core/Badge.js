@@ -1,6 +1,6 @@
 import glamorous from 'glamorous-native';
 
-import { COLORS } from '../utilities/constants';
+import { COLORS } from 'beritapedia/src/utilities/constants';
 
 export default glamorous.view({
   flex: 0,

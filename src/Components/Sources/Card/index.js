@@ -6,7 +6,7 @@ import {
   TouchableCardCore,
   TextCore,
   BadgeCore,
-} from '../../../core';
+} from 'beritapedia/src/core';
 import Styles from './styles';
 
 const Badge = ({ label }) => (
